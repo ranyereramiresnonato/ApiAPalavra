@@ -1,0 +1,6 @@
+@ApiAPalavra_HostAddress = http://localhost:5023
+
+GET {{ApiAPalavra_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
