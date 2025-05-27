@@ -1,3 +1,5 @@
+using ApiAPalavra.Services.LivroBiblicoService;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +8,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddSingleton<ILivroBiblicoService, LivroBiblicoService>();
 
 var app = builder.Build();
 
