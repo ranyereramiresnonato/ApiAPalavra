@@ -1,6 +1,6 @@
 ﻿namespace ApiAPalavra.Models
 {
-    public class ObjetoErroModel
+    public class ObjetoRetornoModel
     {
         public int StatusCode { get; set; }
         public string Resultado { get; set; } = string.Empty;
