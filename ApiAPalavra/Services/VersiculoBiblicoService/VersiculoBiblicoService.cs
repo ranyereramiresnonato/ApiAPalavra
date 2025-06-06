@@ -35,7 +35,7 @@ namespace ApiAPalavra.Services.VersiculoBiblicoService
 
                     var capituloEscolhido = livroBiblico.capitulos[numeroCapitulo - 1];
 
-                    if (numeroVersiculo > capituloEscolhido.Count() || numeroCapitulo <= 0)
+                    if (numeroVersiculo > capituloEscolhido.Count() || numeroVersiculo <= 0)
                     {
                         resultado.StatusCode = 404;
                         resultado.Resultado = "Erro";
