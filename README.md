@@ -27,5 +27,5 @@ Os dados utilizados nesta API foram formatados a partir de uma versão pública 
 #### Ambiente de Desenvolvimento
 
 ```bash
-docker build -t biblia-api-dev --target development .
-docker run -p 3000:3000 biblia-api-dev
+docker build --target build -t biblia-api-dev .
+docker run -it --rm -p 5001:5001 biblia-api-dev
