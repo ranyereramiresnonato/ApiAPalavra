@@ -39,7 +39,7 @@ namespace ApiAPalavra.Services.VersiculoBiblicoService
                     {
                         resultado.StatusCode = 404;
                         resultado.Resultado = "Erro";
-                        resultado.Messagem = "Versículo inválido para o livro";
+                        resultado.Messagem = "Versículo inválido para o capítulo";
                         resultado.Data = null;
 
                         return resultado;
