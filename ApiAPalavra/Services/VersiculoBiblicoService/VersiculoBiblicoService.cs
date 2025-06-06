@@ -48,7 +48,7 @@ namespace ApiAPalavra.Services.VersiculoBiblicoService
                     resultado.StatusCode = 200;
                     resultado.Resultado = "Sucesso";
                     resultado.Messagem = "Sucesso ao realizar a busca dos versículos";
-                    resultado.Data = capituloEscolhido[numeroVersiculo];
+                    resultado.Data = capituloEscolhido[numeroVersiculo - 1];
 
                     return resultado;
                 }
