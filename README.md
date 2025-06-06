@@ -1,36 +1,33 @@
-# 📖 Api A Palavra
+📖 API A Palavra
+Esta é uma API REST que disponibiliza os dados da Bíblia em formato JSON. Os dados foram estruturados com base no projeto Bíblia Livre (créditos abaixo). A API está pronta para execução em ambientes de desenvolvimento e produção via Docker.
 
-Esta é uma API REST que fornece os dados da Bíblia em formato JSON. Os dados foram baseados no projeto **Bíblia Livre**, com os devidos créditos abaixo. A API está configurada para rodar em ambientes de desenvolvimento e produção via Docker.
+🧾 Créditos dos Dados
+Os dados utilizados nesta API foram extraídos e formatados a partir de uma versão pública da Bíblia, com os seguintes créditos:
 
----
+Autor do Arquivo: Everson Silva
 
-## 🧾 Créditos dos Dados
+Representante: everScript
 
-Os dados utilizados nesta API foram formatados a partir de uma versão pública da Bíblia, com os seguintes créditos:
+Data de Criação: 17 de janeiro de 2023
 
-- **Autor do Arquivo**: Everson Silva  
-- **Representante**: everScript  
-- **Data de Criação**: 17 de janeiro de 2023  
-- **Fonte da Versão**: [Projeto Bíblia Livre](https://sites.google.com/site/biblialivre)  
-- **Nota**: O trabalho realizado por Everson Silva foi a **formatação do conteúdo da Bíblia em JSON**. Para mais informações sobre os direitos da versão, visite o site oficial.
+Fonte Original: Projeto Bíblia Livre
 
----
+Observação: O trabalho de Everson Silva consistiu na formatação do conteúdo bíblico em JSON. Para mais informações sobre os direitos da versão utilizada, acesse o site oficial.
 
-## 🚀 Como rodar o projeto
+🚀 Como executar o projeto
+✅ Pré-requisitos
+Docker
 
-### Pré-requisitos
+📦 Executando com Docker
+Ambiente de Desenvolvimento
+Após executar os comandos abaixo, a API estará disponível em:
+🔗 http://localhost:8080
 
-- [Docker](https://www.docker.com/)
+Para acessar a documentação Swagger:
+📘 http://localhost:8080/swagger/index.html
 
-### 📦 Rodando com Docker
-
-#### Ambiente de Desenvolvimento
-
-Após rodar os comandos abaixo a API estará disponível em http://localhost:8080 
-📘 Documentação Swagger após rodar os comandos: Acesse em http://localhost:8080/swagger/index.html
-
-```bash
+bash
+Copiar
+Editar
 docker build -t api-a-palavra .
 docker run -d -p 8080:8080 -p 8081:8081 --name api-a-palavra-container api-a-palavra
-
-
