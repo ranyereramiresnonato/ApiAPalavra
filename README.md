@@ -26,8 +26,8 @@ Os dados utilizados nesta API foram formatados a partir de uma versão pública 
 
 #### Ambiente de Desenvolvimento
 
-A API estará disponível em http://localhost:8080 após rodar os comandos abaixo e no link abaixo você poderá acessar a documentação
-📘 Documentação Swagger: Acesse em http://localhost:8080/swagger/index.html
+Após rodar os comandos abaixo a API estará disponível em http://localhost:8080 
+📘 Documentação Swagger após rodar os comandos: Acesse em http://localhost:8080/swagger/index.html
 
 ```bash
 docker build -t api-a-palavra .
