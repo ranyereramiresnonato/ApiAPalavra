@@ -27,5 +27,11 @@ Os dados utilizados nesta API foram formatados a partir de uma versão pública 
 #### Ambiente de Desenvolvimento
 
 ```bash
-docker build --target build -t biblia-api-dev .
-docker run -it --rm -p 5001:5001 biblia-api-dev
+docker build -t api-a-palavra .
+docker run -d -p 8080:8080 -p 8081:8081 --name api-a-palavra-container api-a-palavra
+
+A API estará disponível em http://localhost:8080.
+
+📘 Documentação Swagger: Acesse em http://localhost:8080/swagger/index.html
+
+
