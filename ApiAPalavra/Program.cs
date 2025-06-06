@@ -1,4 +1,5 @@
 using ApiAPalavra.Services.LivroBiblicoService;
+using ApiAPalavra.Services.VersiculoBiblicoService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<ILivroBiblicoService, LivroBiblicoService>();
+builder.Services.AddSingleton<IVersiculoBiblicoService, VersiculoBiblicoService>();
 
 var app = builder.Build();
 
