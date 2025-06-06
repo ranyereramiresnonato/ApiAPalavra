@@ -12,8 +12,17 @@ namespace ApiAPalavra.Controllers
             _versiculoBiblicoService = versiculoBiblicoService;
         }
 
+        /// <summary>
+        /// Busca um versículo bíblico e o retorna
+        /// </summary>
+        /// <param name="idLivro">Id do livro.</param>
+        /// <param name="numeroCapitulo">Número do capítulo.</param>
+        /// <param name="numeroVersiculo">Número do versículo.</param>
+        /// <returns>Retorna o versículo correspondente aos parâmetros.</returns>
         [HttpGet, Route("BuscarVersiculoBiblico/{idLivro}/{numeroCapitulo}/{numeroVersiculo}")]
-
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ObjetoRetornoModel))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ObjetoRetornoModel))]
         public async Task<IActionResult> BuscarVersiculoBiblico(int idLivro, int numeroCapitulo, int numeroVersiculo)
         {
             try

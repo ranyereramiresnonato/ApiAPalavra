@@ -14,7 +14,13 @@ namespace ApiAPalavra.Controllers
             _iLivroBiblicoService = livroBiblicoService;
         }
 
+        /// <summary>
+        /// Busca todos os livros da bíblia
+        /// </summary>
+        /// <returns>Retorna todos os livros da bíblia.</returns>
         [HttpGet, Route("BuscarTodosOsLivros")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<LivroSimplificadoModel>))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(List<ObjetoRetornoModel>))]
         public async Task<ActionResult> BuscarTodosOsLivros()
         {
             try
@@ -42,7 +48,15 @@ namespace ApiAPalavra.Controllers
             }
         }
 
+        /// <summary>
+        /// Busca um livro da bíblia pelo Id
+        /// </summary>
+        /// <param name="id">Id do livro.</param>
+        /// <returns>Retorna o livro pelo Id informado.</returns>
         [HttpGet, Route("BuscarLivroPorId/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(LivroSimplificadoMaisCapitulosModel))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ObjetoRetornoModel))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ObjetoRetornoModel))]
         public async Task<IActionResult> BuscarLivroPorId(int id)
         {
             try
@@ -70,6 +84,15 @@ namespace ApiAPalavra.Controllers
             }
         }
 
+        /// <summary>
+        /// Busca um capítulo completo de um livro da bíblia
+        /// </summary>
+        /// <param name="idLivro">Id do livro.</param>
+        /// <param name="numeroCapitulo">Número do capítulo.</param>
+        /// <returns>Retorna todos os versóculos do capítulo pelos parâmetros informados.</returns>
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<string>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ObjetoRetornoModel))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ObjetoRetornoModel))]
         [HttpGet, Route("BuscarCapituloDeUmLivro/{idLivro}/{numeroCapitulo}")]
 
         public async Task<IActionResult> BuscarCapituloDeUmLivro(int idLivro, int numeroCapitulo)
