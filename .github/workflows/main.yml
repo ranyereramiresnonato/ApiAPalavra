@@ -14,24 +14,29 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2️⃣ Build da imagem Docker (só pra garantir que o Dockerfile não quebra)
+      # 2️⃣ Build da imagem Docker (valida o Dockerfile)
       - name: Build Docker image
         run: docker build -t apiapalavra-test ./ApiAPalavra
 
-      # 3️⃣ Instala .NET e SonarScanner no runner
+      # 3️⃣ Configura .NET
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x'
 
+      # 4️⃣ Instala SonarScanner
       - name: Install SonarScanner
         run: dotnet tool install --global dotnet-sonarscanner
-          
+
+      # 5️⃣ Rodar análise do SonarCloud
       - name: SonarCloud Scan
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        working-directory: ./ApiAPalavra
         run: |
           export PATH="$PATH:/home/runner/.dotnet/tools"
+
+          # Inicia a análise do SonarCloud
           dotnet sonarscanner begin \
             /k:"seu-projeto-key" \
             /o:"sua-organizacao" \
@@ -40,6 +45,8 @@ jobs:
             /d:sonar.pullrequest.branch=${{ github.head_ref }} \
             /d:sonar.pullrequest.base=${{ github.base_ref }}
 
-          dotnet build ./ApiAPalavra --no-restore --configuration Release
+          # Build do projeto
+          dotnet build --no-restore --configuration Release
 
+          # Finaliza a análise do SonarCloud
           dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}
