@@ -1,4 +1,4 @@
-name: CI - PR Analysis
+name: CI - Sonar & Docker Check
 
 on:
   pull_request:
@@ -6,39 +6,40 @@ on:
       - main
 
 jobs:
-  build-and-analyze:
+  sonar-and-docker:
     runs-on: ubuntu-latest
+
     steps:
-      # 1. Pega o código do PR
+      # 1️⃣ Pega o código do PR
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2. Configura o .NET
+      # 2️⃣ Build da imagem Docker (só pra garantir que o Dockerfile não quebra)
+      - name: Build Docker image
+        run: docker build -t apiapalavra-test ./ApiAPalavra
+
+      # 3️⃣ Instala .NET e SonarScanner no runner
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x' # ou a versão do seu projeto
+          dotnet-version: '8.0.x'
 
-      # 3. Instala o SonarScanner
-      - name: Setup SonarCloud
-        uses: SonarSource/sonarcloud-github-action@v2
-        with:
-          organization: ${{ secrets.SONAR_ORGANIZATION }} 
-          token: ${{ secrets.SONAR_TOKEN }}
-
-      # 4. Restore das dependências
-      - name: Restore dependencies
-        run: dotnet restore
-
-      # 5. Build do projeto
-      - name: Build
-        run: dotnet build --no-restore --configuration Release
-
-      # 7. Rodar análise do SonarCloud
+      - name: Install SonarScanner
+        run: dotnet tool install --global dotnet-sonarscanner
+          
       - name: SonarCloud Scan
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: dotnet sonarscanner begin /k:"seu-projeto-key" /o:"sua-organizacao" /d:sonar.pullrequest.key=${{ github.event.pull_request.number }} /d:sonar.pullrequest.branch=${{ github.head_ref }} /d:sonar.pullrequest.base=${{ github.base_ref }}
-        
-      - run: dotnet build
-      - run: dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}
+        run: |
+          export PATH="$PATH:/home/runner/.dotnet/tools"
+          dotnet sonarscanner begin \
+            /k:"seu-projeto-key" \
+            /o:"sua-organizacao" \
+            /d:sonar.host.url="https://sonarcloud.io" \
+            /d:sonar.pullrequest.key=${{ github.event.pull_request.number }} \
+            /d:sonar.pullrequest.branch=${{ github.head_ref }} \
+            /d:sonar.pullrequest.base=${{ github.base_ref }}
+
+          dotnet build ./ApiAPalavra --no-restore --configuration Release
+
+          dotnet sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}
