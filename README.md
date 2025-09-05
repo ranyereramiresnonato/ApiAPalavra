@@ -34,4 +34,4 @@ Para acessar a documentação Swagger:
 
 ```bash
 docker build -t api-a-palavra .
-docker run -d -p 8080:8080 -p 8081:8081 --name api-a-palavra-container api-a-palavra
+docker run -d -p 8080:8080 -p 8081:8081 --name api-a-palavra-container api-a-palavra 
